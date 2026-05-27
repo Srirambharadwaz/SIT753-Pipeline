@@ -58,30 +58,4 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            script {
-                def status = currentBuild.currentResult
-                mail(
-                    to: 'bharadwazmiryalkar@gmail.com',
-                    subject: "${status}: Jenkins Pipeline - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                    body: """
-Pipeline Notification
----------------------
-Status:     ${status}
-Job:        ${env.JOB_NAME}
-Build No:   ${env.BUILD_NUMBER}
-Duration:   ${currentBuild.durationString}
-View build: ${env.BUILD_URL}
-                    """
-                )
-            }
-        }
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
-        }
-    }
 }
